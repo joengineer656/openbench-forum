@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-default="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenBench | نبض المجتمع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/base.css">
+<script src="shared/data.js"></script><script src="shared/core.js"></script>
+<style>
+:root{--bg:#fbfcfd;--card:#fff;--ink:#17212b;--soft:#5b6773;--line:#e3e8ed;--l0:#eef2f5;--l1:#c9e8e4;--l2:#8fd0c8;--l3:#3fa99e;--l4:#0f766e;--warn:#e8590c;--teal:#0f766e;--teal-ink:#fff;--focus:#0f766e;--f:"Readex Pro",sans-serif}
+html[data-theme=dark]{--bg:#0c1116;--card:#141b22;--ink:#e9eef3;--soft:#9aa7b4;--line:#242e38;--l0:#1b242c;--l1:#12413f;--l2:#17625c;--l3:#1f968a;--l4:#4fd6c7;--warn:#ff8a45;--teal:#4fd6c7;--teal-ink:#05211e;--focus:#4fd6c7}
+body{background:var(--bg);color:var(--ink);font:400 .95rem/1.7 var(--f)}
+.wrap{max-width:1240px;margin:auto;padding:0 24px}
+.top .wrap{display:flex;align-items:center;gap:14px;min-height:62px}
+.logo{font:700 1.3rem var(--f);direction:ltr}
+.logo i{display:inline-block;width:.55em;height:.55em;border-radius:50%;background:var(--teal);margin-inline-start:4px}
+.top nav{display:flex;gap:4px 18px;color:var(--soft);font-size:.88rem;margin-inline-start:8px}
+.top nav a:hover,.top nav a[aria-current]{color:var(--ink)}
+.tools{display:flex;gap:8px;margin-inline-start:auto;align-items:center}
+.tools input{width:190px;height:38px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.ib{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;box-shadow:0 0 0 1px var(--line);background:var(--card)}
+.btn{display:inline-flex;align-items:center;height:38px;padding:0 16px;border-radius:10px;font-weight:600;white-space:nowrap;font-size:.9rem}
+.btn-t{background:var(--teal);color:var(--teal-ink)}.btn-g{box-shadow:inset 0 0 0 1px var(--line)}
+.head{padding:26px 0 8px}
+.head h1{font:700 clamp(1.5rem,3vw,2.1rem)/1.4 var(--f)}
+.head p{color:var(--soft)}
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
+.kpi div{padding:14px 18px;border-radius:14px;background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.kpi b{display:block;font:600 1.8rem/1.2 var(--f)}
+.kpi span{color:var(--soft);font-size:.86rem}
+.kpi .w b{color:var(--warn)}
+.heat{padding:18px 20px 14px;border-radius:18px;background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.heat h2{font:600 1.1rem var(--f)}
+.heat .sub{color:var(--soft);font-size:.86rem;margin-bottom:12px}
+.hrow{display:grid;grid-template-columns:170px minmax(0,1fr) 92px;gap:14px;align-items:center;width:100%;text-align:start;padding:6px 8px;border-radius:12px;box-shadow:inset 0 0 0 2px transparent}
+.hrow:hover{background:var(--bg)}
+.hrow.is-on{box-shadow:inset 0 0 0 2px var(--teal);background:var(--bg)}
+.hn{display:flex;gap:8px;align-items:center;font-weight:600}
+.hn .ic{color:var(--teal);width:18px;height:18px}
+.cells{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));gap:3px}
+.cells i{aspect-ratio:1;max-height:30px;border-radius:4px;background:var(--l0)}
+.cells .l1{background:var(--l1)}.cells .l2{background:var(--l2)}.cells .l3{background:var(--l3)}.cells .l4{background:var(--l4)}
+.hphotos{display:flex;justify-content:flex-end}
+.hphotos .cover{width:30px;height:30px;border-radius:50%;box-shadow:0 0 0 2px var(--card);margin-inline-start:-8px}
+.hphotos .cover .ic{width:55%;min-width:0}
+.hours{display:grid;grid-template-columns:170px minmax(0,1fr) 92px;gap:14px;padding:0 8px 6px;color:var(--soft);font-size:.74rem}
+.hours div{display:flex;justify-content:space-between}
+.legend{display:flex;gap:6px;align-items:center;justify-content:flex-end;margin-top:10px;color:var(--soft);font-size:.8rem}
+.legend i{width:14px;height:14px;border-radius:3px;background:var(--c)}
+.detail{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:start;margin:22px 0 56px}
+.panel{padding:20px;border-radius:18px;background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.panel h2{font:700 1.5rem/1.4 var(--f)}
+.panel .d{color:var(--soft)}
+.sts{display:flex;gap:22px;margin:12px 0}
+.sts div{font-size:.84rem;color:var(--soft)}.sts b{display:block;font:600 1.4rem var(--f);color:var(--ink)}
+.sts .w b{color:var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.chip{padding:3px 14px;border-radius:8px;box-shadow:inset 0 0 0 1px var(--line);font-size:.86rem;color:var(--soft)}
+.chip.is-on{background:var(--ink);color:var(--bg);box-shadow:none}
+.th li a{display:block;padding:10px 0;border-top:1px solid var(--line)}
+.th li:first-child a{border-top:0}
+.th b{display:block;font-weight:500;line-height:1.6}
+.th a:hover b{color:var(--teal)}
+.m{font-size:.82rem;color:var(--soft)}
+.panel h3{font:600 1.05rem var(--f);margin:20px 0 10px}
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.pcard .cover{aspect-ratio:4/3;border-radius:12px}
+.pcard b{display:block;margin-top:6px;font-weight:500;line-height:1.5;font-size:.9rem}
+.pcard:hover b{color:var(--teal)}
+.cl li a{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.cl li:first-child a{border-top:0}
+.cl a:hover b{color:var(--teal)}
+.cl b{font-weight:500}
+.side{display:flex;flex-direction:column;gap:16px}
+.side section{padding:16px;border-radius:16px;background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.side h2{font:600 1rem var(--f);margin-bottom:6px}
+.side.u section:first-child{box-shadow:0 0 0 1px var(--warn)}
+.side li a{display:block;padding:6px 0;font-size:.88rem;line-height:1.55}
+.side li a:hover{color:var(--teal)}
+.side small{display:block;color:var(--soft)}
+.vid{position:relative;display:block}.vid .cover{aspect-ratio:16/9;border-radius:10px}
+.play{position:absolute;inset:0;margin:auto;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--teal);color:var(--teal-ink)}
+.play .ic{width:18px;height:18px;translate:-1px 0}
+.faces{display:flex;flex-wrap:wrap;gap:6px}
+.empty{padding:14px 0;color:var(--soft)}
+.foot{border-top:1px solid var(--line)}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:8px 22px;min-height:70px;align-items:center;color:var(--soft);font-size:.88rem}
+.foot span{margin-inline-start:auto}
+@media (max-width:980px){.detail{grid-template-columns:1fr}.kpi{grid-template-columns:repeat(2,1fr)}.top nav,.tools input{display:none}}
+@media (max-width:640px){
+  .wrap{padding:0 14px}.tools .btn-g{display:none}
+  .hrow,.hours{grid-template-columns:1fr}.hours{display:none}
+  .hphotos{justify-content:flex-start}.hphotos .cover{margin-inline-start:0;margin-inline-end:-8px}
+  .cells i{max-height:18px}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#">OpenBench<i></i></a><nav aria-label="التنقل الرئيسي" id="nav"></nav>
+  <div class="tools"><input type="search" placeholder="ابحث" aria-label="بحث"><button class="ib" data-theme-toggle type="button"></button><a class="btn btn-g" href="#">دخول</a><a class="btn btn-t" href="#">أنشئ حسابك</a></div>
+</div></header>
+<main class="wrap">
+  <section class="head"><h1>نبض المجتمع الآن</h1><p>أين يدور النقاش في آخر 24 ساعة؟ اضغط على صف مجال لترى ما يجري فيه.</p></section>
+  <section class="kpi" id="kpi" aria-label="أرقام اليوم"></section>
+  <section class="heat" aria-labelledby="hh"><h2 id="hh">النشاط بحسب المجال والساعة</h2><p class="sub">كل مربع ساعة واحدة. اللون الأغمق يعني مشاركات أكثر.</p>
+    <div class="hours" aria-hidden="true"><span></span><div><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div><span></span></div>
+    <div id="rows" role="tablist" aria-label="المجالات"></div>
+    <div class="legend"><span>أقل</span><i style="--c:var(--l0)"></i><i style="--c:var(--l1)"></i><i style="--c:var(--l2)"></i><i style="--c:var(--l3)"></i><i style="--c:var(--l4)"></i><span>أكثر</span></div>
+  </section>
+  <div class="detail"><section class="panel" id="panel" aria-live="polite"></section><aside class="side u" id="side"></aside></div>
+</main>
+<footer class="foot"><div class="wrap"><a href="#">عن المنتدى</a><a href="#">القوانين</a><a href="#">الخصوصية</a><a href="#">تواصل معنا</a><span>© 2026 OpenBench</span></div></footer>
+<script>
+OB.ready(function(){
+  var D=OB.D,$=OB.$;
+  $('#nav').innerHTML=OB.nav(0);
+  var open=OB.unanswered().length;
+  $('#kpi').innerHTML='<div><b>820</b><span>مشاركة اليوم</span></div><div><b>'+D.stats.online+'</b><span>متصلون الآن</span></div><div class="w"><b>'+open+'</b><span>سؤال بلا إجابة</span></div><div><b>96%</b><span>أسئلة محلولة</span></div>';
+  // Placeholder heat data: a daily curve peaking mid-afternoon, scaled per field. Real data comes from post timestamps.
+  var base=[3,2,5,4,2,3.5];
+  function lvl(fi,h){var c=.5+.5*Math.sin((h-9)/24*2*Math.PI),n=Math.abs(Math.sin(fi*12.9898+h*78.233)*43758.5453)%1;return Math.max(0,Math.min(4,Math.round((base[fi]/5*c*.85+n*.3)*4.4)));}
+  $('#rows').innerHTML=D.fields.map(function(f,fi){
+    var cells='';for(var h=0;h<24;h++)cells+='<i class="l'+lvl(fi,h)+'"></i>';
+    var tot=0;for(h=0;h<24;h++)tot+=lvl(fi,h)*3;
+    var ph=OB.projects(f.id).slice(0,2).map(function(p){return OB.cover(p);}).join('');
+    return '<button type="button" role="tab" class="hrow" data-field="'+f.id+'" aria-label="'+f.name+': نحو '+tot+' مشاركة في آخر 24 ساعة"><span class="hn">'+OB.icon(f.icon)+f.name+'</span><span class="cells" aria-hidden="true">'+cells+'</span><span class="hphotos" aria-hidden="true">'+ph+'</span></button>';
+  }).join('');
+  OB.group($('#rows'),'data-field','field');
+  OB.bindKinds($('#panel'));
+  OB.on(function(s){
+    var f=OB.field(s.field),th=OB.threads(s.field,s.kind),pr=OB.projects(s.field),co=OB.courses(s.field),un=OB.unanswered().filter(function(t){return t.f===s.field;}).length;
+    $('#panel').innerHTML='<h2>'+f.name+'</h2><p class="d">'+f.desc+'</p><div class="sts"><div><b>'+f.topics+'</b>موضوع</div><div><b>'+f.posts+'</b>رسالة</div><div class="w"><b>'+un+'</b>بلا إجابة</div></div>'+OB.kindBar(s.kind)+
+     '<ul class="th">'+(th.map(function(t){return '<li><a href="#"><b>'+t.title+'</b><span class="m">'+OB.kindTags(t)+' '+t.by+'، '+t.ago+'، '+t.r+' ردًا</span></a></li>';}).join('')||'<li class="empty">لا توجد مشاركات من هذا النوع بعد.</li>')+'</ul>'+
+     '<h3>مشاريع الأعضاء</h3><div class="pg">'+pr.map(function(p){return '<a class="pcard" href="#">'+OB.cover(p)+'<b>'+p.title+'</b><span class="m">'+p.by+'، '+p.likes+' إعجاب</span></a>';}).join('')+'</div>'+
+     '<h3>الدورات</h3><ul class="cl">'+co.map(function(c){return '<li><a href="#"><b>'+c.title+'</b><span class="m">'+c.n+' درسًا، '+c.level+'</span></a></li>';}).join('')+'</ul>';
+  });
+  var v=D.video;
+  $('#side').innerHTML='<section><h2>أسئلة بلا إجابة</h2><ul>'+OB.unanswered(5).map(function(t){return '<li><a href="#">'+t.title+'<small>'+OB.field(t.f).name+'، '+t.ago+'</small></a></li>';}).join('')+'</ul></section><section><h2>أحدث فيديو</h2><a class="vid" href="#">'+OB.cover(v)+'<span class="play">'+OB.icon('play')+'</span></a><p style="margin-top:6px;font-size:.88rem">'+v.title+'</p></section><section><h2>متصلون الآن</h2><div class="faces">'+D.online.map(function(n){return OB.av(n,'30px');}).join('')+'</div></section>';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-default="light" data-all>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenBench | البحث أولًا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/base.css">
+<script src="shared/data.js"></script><script src="shared/core.js"></script>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--ink:#1d2127;--soft:#5d6671;--line:#e2e5ea;--violet:#6a4cff;--violet-ink:#fff;--hl:#ffe27a;--hl-ink:#2b2200;--focus:#6a4cff;--f:"Noto Kufi Arabic",sans-serif}
+html[data-theme=dark]{--bg:#14161b;--card:#1d2026;--ink:#eef0f3;--soft:#a3abb6;--line:#2c3038;--violet:#9d87ff;--violet-ink:#150c3d;--hl:#6b5a14;--hl-ink:#fff6cf;--focus:#9d87ff}
+body{background:var(--bg);color:var(--ink);font:400 .98rem/1.75 var(--f)}
+.wrap{max-width:1120px;margin:auto;padding:0 24px}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:64px}
+.logo{font:800 1.25rem var(--f);direction:ltr}
+.top nav{display:flex;gap:4px 18px;color:var(--soft);font-size:.88rem;margin-inline-start:12px}
+.top nav a:hover,.top nav a[aria-current]{color:var(--ink)}
+.tools{display:flex;gap:8px;margin-inline-start:auto;align-items:center}
+.ib{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.btn{display:inline-flex;align-items:center;height:38px;padding:0 18px;border-radius:19px;font-weight:700;font-size:.9rem;white-space:nowrap}
+.btn-v{background:var(--violet);color:var(--violet-ink)}.btn-g{box-shadow:inset 0 0 0 1px var(--line)}
+.hero{padding:52px 0 26px;text-align:center}
+.hero h1{font:800 clamp(1.7rem,4vw,2.7rem)/1.4 var(--f)}
+.hero p{color:var(--soft);margin-top:6px}
+.sb{position:relative;max-width:760px;margin:26px auto 0}
+.sb input{width:100%;height:64px;padding:0 60px 0 90px;border:0;border-radius:20px;background:var(--card);font-size:1.15rem;box-shadow:0 0 0 1px var(--line),0 12px 32px rgba(40,30,90,.08)}
+.sb input:focus{outline:none;box-shadow:0 0 0 3px var(--violet),0 12px 32px rgba(40,30,90,.12)}
+.sb .ic{position:absolute;inset-inline-start:20px;top:50%;translate:0 -50%;width:24px;height:24px;color:var(--soft)}
+.sb kbd{position:absolute;inset-inline-end:18px;top:50%;translate:0 -50%;padding:2px 10px;border-radius:8px;background:var(--bg);box-shadow:0 0 0 1px var(--line);font:500 .85rem var(--f);color:var(--soft)}
+.filters{max-width:900px;margin:22px auto 0;display:flex;flex-direction:column;gap:10px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{padding:5px 16px;border-radius:999px;background:var(--card);box-shadow:0 0 0 1px var(--line);font-size:.88rem;font-weight:500;color:var(--soft)}
+.chip:hover{color:var(--ink)}
+.chip.is-on{background:var(--violet);color:var(--violet-ink);box-shadow:none}
+.seg{display:inline-flex;flex-wrap:wrap;padding:3px;border-radius:12px;background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.seg .chip{box-shadow:none;border-radius:9px;background:none}
+.seg .chip.is-on{background:var(--ink);color:var(--bg)}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;padding:30px 0 56px;align-items:start}
+.count{color:var(--soft);font-size:.88rem;margin-bottom:10px}
+.res li{margin-bottom:8px}
+.res a{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;padding:12px 14px;border-radius:14px;background:var(--card);box-shadow:0 0 0 1px var(--line);transition:box-shadow .15s}
+.res a:hover{box-shadow:0 0 0 2px var(--violet)}
+.res .cover{width:92px;aspect-ratio:4/3;border-radius:10px}
+.res .ico{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--bg);color:var(--soft)}
+.res b{display:block;font-weight:600;line-height:1.6}
+.res .m{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;color:var(--soft);font-size:.82rem}
+mark{background:var(--hl);color:var(--hl-ink);border-radius:4px;padding:0 2px}
+.none{padding:40px 20px;text-align:center;background:var(--card);border-radius:16px;box-shadow:0 0 0 1px var(--line)}
+.none p{margin-bottom:14px;color:var(--soft)}
+.side{display:flex;flex-direction:column;gap:16px}
+.box{padding:16px;border-radius:16px;background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.box h2{font:700 .98rem var(--f);margin-bottom:8px}
+.box li a{display:block;padding:7px 0;line-height:1.55;font-size:.88rem}
+.box li a:hover{color:var(--violet)}
+.box small{display:block;color:var(--soft)}
+.vid{position:relative;display:block}.vid .cover{aspect-ratio:16/9;border-radius:10px}
+.play{position:absolute;inset:0;margin:auto;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--violet);color:var(--violet-ink)}
+.play .ic{width:18px;height:18px;translate:-1px 0}
+.faces{display:flex;flex-wrap:wrap;gap:6px}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:8px 22px;min-height:70px;align-items:center;color:var(--soft);font-size:.88rem}
+.foot span{margin-inline-start:auto}
+@media (max-width:900px){.main{grid-template-columns:1fr}.top nav{display:none}}
+@media (max-width:600px){.wrap{padding:0 16px}.sb input{height:56px;padding-inline-end:20px}.sb kbd{display:none}.tools .btn-g{display:none}.res .cover{width:72px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#">OpenBench</a><nav aria-label="التنقل الرئيسي" id="nav"></nav>
+  <div class="tools"><button class="ib" data-theme-toggle type="button"></button><a class="btn btn-g" href="#">دخول</a><a class="btn btn-v" href="#">أنشئ حسابك</a></div>
+</div></header>
+<main>
+  <section class="hero wrap">
+    <h1>ابحث في أرشيف المهندسين العرب</h1>
+    <p>أسئلة محلولة، شروحات، دورات، ومشاريع. كل ما كُتب بالعربية في مكان واحد.</p>
+    <form class="sb" role="search" onsubmit="return false">
+      <label class="sr-only" for="q">بحث</label><input id="q" type="search" autocomplete="off" placeholder="مثال: PID، ESP32، ROS، ترانزستور">
+      <span aria-hidden="true">__ICON__</span><kbd aria-hidden="true">/</kbd>
+    </form>
+    <div class="filters"><div class="chips" id="fields" aria-label="المجال"></div><div id="kinds" class="seg"></div></div>
+  </section>
+  <div class="wrap main">
+    <section aria-live="polite"><p class="count" id="count"></p><ul class="res" id="res"></ul></section>
+    <aside class="side" id="side"></aside>
+  </div>
+</main>
+<footer class="foot"><div class="wrap"><a href="#">عن المنتدى</a><a href="#">القوانين</a><a href="#">الخصوصية</a><a href="#">تواصل معنا</a><span>© 2026 OpenBench</span></div></footer>
+<script>
+OB.ready(function(){
+  var D=OB.D,$=OB.$,q='';
+  $('#nav').innerHTML=OB.nav(0);
+  $('.sb span').innerHTML=OB.icon('search');
+  $('#fields').innerHTML='<button type="button" class="chip" data-field="all">كل المجالات</button>'+D.fields.map(function(f){return '<button type="button" class="chip" data-field="'+f.id+'">'+f.name+'</button>';}).join('');
+  OB.group($('#fields'),'data-field','field');
+  $('#kinds').innerHTML=[['all','الكل'],['q','أسئلة'],['t','شروحات'],['d','نقاشات'],['p','مشاريع'],['c','دورات']].map(function(k){return '<button type="button" class="chip" data-kind="'+k[0]+'">'+k[1]+'</button>';}).join('');
+  OB.group($('#kinds'),'data-kind','kind');
+  $('#q').addEventListener('input',function(e){q=e.target.value.trim();render(OB.state);});
+  document.addEventListener('keydown',function(e){if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){e.preventDefault();$('#q').focus();}});
+
+  function hl(s){if(!q)return s;var i=s.toLowerCase().indexOf(q.toLowerCase());return i<0?s:s.slice(0,i)+'<mark>'+s.slice(i,i+q.length)+'</mark>'+s.slice(i+q.length);}
+  function match(txt){return !q||txt.toLowerCase().indexOf(q.toLowerCase())>-1;}
+  function render(s){
+    var out=[],k=s.kind;
+    if(k==='all'||'qtd'.indexOf(k)>-1)OB.threads(s.field,k).forEach(function(t){if(match(t.title+' '+t.by))out.push('<li><a href="#"><span class="ico">'+OB.icon(t.k==='q'?'help':t.k==='t'?'book':'msg')+'</span><div><b>'+hl(t.title)+'</b><div class="m">'+OB.kindTags(t)+'<span>'+OB.field(t.f).name+'</span><span>'+t.by+'، '+t.ago+'، '+t.r+' ردًا</span></div></div></a></li>');});
+    if(k==='all'||k==='p')OB.projects(s.field).forEach(function(p){if(match(p.title+' '+p.tags.join(' ')+' '+p.by))out.push('<li><a href="#">'+OB.cover(p)+'<div><b>'+hl(p.title)+'</b><div class="m"><span class="kind kind-t">مشروع</span><span>'+OB.field(p.f).name+'</span><span>'+p.by+'، '+p.likes+' إعجاب</span></div></div></a></li>');});
+    if(k==='all'||k==='c')OB.courses(s.field).forEach(function(c){if(match(c.title+' '+c.by))out.push('<li><a href="#">'+OB.cover(c)+'<div><b>'+hl(c.title)+'</b><div class="m"><span class="kind kind-s">دورة</span><span>'+OB.field(c.f).name+'</span><span>'+c.n+' درسًا، '+c.level+'، '+c.by+'</span></div></div></a></li>');});
+    $('#count').textContent=out.length?out.length+' نتيجة'+(q?' لـ «'+q+'»':''):'';
+    $('#res').innerHTML=out.join('')||'<li class="none"><p>لا نتائج'+(q?' لـ «'+q+'»':'')+'. جرّب كلمة أخرى، أو اطرح سؤالك للمجتمع.</p><a class="btn btn-v" href="#" style="display:inline-flex">اطرح سؤالًا</a></li>';
+  }
+  OB.on(render);
+  var v=D.video;
+  $('#side').innerHTML='<section class="box"><h2>أحدث فيديو</h2><a class="vid" href="#">'+OB.cover(v)+'<span class="play">'+OB.icon('play')+'</span></a><p style="margin-top:8px;font-weight:600;font-size:.88rem">'+v.title+'</p></section>'+
+   '<section class="box"><h2>أسئلة بلا إجابة</h2><ul>'+OB.unanswered(4).map(function(t){return '<li><a href="#">'+t.title+'<small>'+t.by+'، '+t.ago+'</small></a></li>';}).join('')+'</ul></section>'+
+   '<section class="box"><h2>متصلون الآن</h2><div class="faces">'+D.online.map(function(n){return OB.av(n,'30px');}).join('')+'</div></section>';
+});
+</script>
+</body>
+</html>

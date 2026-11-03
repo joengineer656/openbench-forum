@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-default="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenBench | القناة أولًا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zain:wght@300;400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/base.css">
+<script src="shared/data.js"></script><script src="shared/core.js"></script>
+<style>
+:root{--bg:#fff;--ink:#161a20;--soft:#586170;--line:#e6e9ee;--gray:#eef0f3;--red:#e5372a;--red-ink:#fff;--player:#0f1218;--player-ink:#f2f4f7;--focus:#e5372a;--f:"Zain",sans-serif}
+html[data-theme=dark]{--bg:#0b0d11;--ink:#f0f2f5;--soft:#9ca4b0;--line:#222730;--gray:#171b21;--red:#ff5446;--red-ink:#1a0603;--player:#161a21;--player-ink:#f2f4f7;--focus:#ff5446}
+body{background:var(--bg);color:var(--ink);font:400 1.1rem/1.7 var(--f)}
+.wrap{max-width:1320px;margin:auto;padding:0 28px}
+.top .wrap{display:flex;align-items:center;gap:16px;min-height:66px}
+.logo{font:900 1.6rem var(--f);direction:ltr}
+.logo i{font-style:normal;color:var(--red)}
+.top nav{display:flex;gap:4px 20px;color:var(--soft);font-weight:700;margin-inline-start:10px}
+.top nav a:hover,.top nav a[aria-current]{color:var(--ink)}
+.tools{display:flex;gap:8px;margin-inline-start:auto;align-items:center}
+.tools input{width:220px;height:40px;padding:0 16px;border-radius:20px;border:1px solid var(--line);background:var(--gray)}
+.ib{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--gray)}
+.btn{display:inline-flex;align-items:center;height:40px;padding:0 20px;border-radius:20px;font-weight:700;white-space:nowrap}
+.btn-r{background:var(--red);color:var(--red-ink)}.btn-g{background:var(--gray)}
+.layout{display:grid;grid-template-columns:minmax(340px,460px) minmax(0,1fr);gap:40px;align-items:start;padding:20px 0 60px}
+.left{position:sticky;top:16px;display:flex;flex-direction:column;gap:14px}
+.player{border-radius:18px;background:var(--player);color:var(--player-ink);overflow:hidden}
+.screen{position:relative;display:block}
+.screen .cover{aspect-ratio:16/9}
+html[data-theme=light] .player .cover{color:hsl(var(--h) 80% 78%/.75);background:radial-gradient(circle at 72% 24%,hsl(var(--h) 85% 55%/.4),transparent 62%),linear-gradient(hsl(var(--h) 60% 72%/.13) 1px,transparent 1px) 0 0/18px 18px,linear-gradient(90deg,hsl(var(--h) 60% 72%/.13) 1px,transparent 1px) 0 0/18px 18px,hsl(var(--h) 40% 15%)}
+.screen .cover .ic{width:22%}
+.play{position:absolute;inset:0;margin:auto;display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:var(--red);color:var(--red-ink);transition:transform .15s}
+.screen:hover .play{transform:scale(1.08)}
+.play .ic{width:26px;height:26px;translate:-2px 0}
+.timeline{display:flex;gap:3px;padding:12px 14px 0;direction:rtl}
+.seg{height:10px;border-radius:5px;background:hsl(var(--h) 70% 55%);opacity:.45;transition:opacity .15s,height .15s;position:relative}
+.seg:hover{opacity:.8}
+.seg.is-on{opacity:1;height:14px;margin-top:-2px}
+.pinfo{padding:12px 16px 16px}
+.pinfo h1{font:800 1.3rem/1.5 var(--f)}
+.pinfo p{color:#aab2be;font-size:.95rem}
+.chapters{list-style:none}
+.chapters h2{font:800 1.15rem var(--f);margin:6px 2px 8px}
+.chap{display:flex;align-items:center;gap:12px;width:100%;padding:9px 12px;border-radius:12px;text-align:start;font-weight:700}
+.chap:hover{background:var(--gray)}
+.chap.is-on{background:var(--gray);box-shadow:inset -4px 0 0 hsl(var(--h) 75% 52%)}
+.chap .dot{width:12px;height:12px;border-radius:50%;background:hsl(var(--h) 75% 55%)}
+.chap small{margin-inline-start:auto;color:var(--soft);font-weight:400}
+.right h2.ct{font:900 clamp(1.8rem,3.4vw,2.6rem)/1.3 var(--f)}
+.right .sub{color:var(--soft);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 6px}
+.chip{padding:3px 16px;border-radius:999px;background:var(--gray);font-weight:700;color:var(--soft)}
+.chip:hover{color:var(--ink)}
+.chip.is-on{background:var(--ink);color:var(--bg)}
+.threads li a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:12px 0;border-top:1px solid var(--line);align-items:center}
+.threads li:first-child a{border-top:0}
+.threads b{font-weight:700;font-size:1.12rem;line-height:1.5;display:block}
+.threads a:hover b{color:var(--red)}
+.m{color:var(--soft);font-size:.95rem}
+.right h3{font:800 1.4rem var(--f);margin:34px 0 4px}
+.right h3+p{color:var(--soft);margin-bottom:12px;font-size:.98rem}
+.thumbs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.th .cover{aspect-ratio:16/9;border-radius:12px;position:relative}
+.th a{display:block}
+.thumbs .bd{position:absolute;bottom:8px;inset-inline-start:8px;padding:0 8px;border-radius:6px;background:rgba(0,0,0,.75);color:#fff;font-size:.82rem;font-weight:700}
+.th b{display:block;margin-top:8px;font-weight:700;line-height:1.5}
+.th a:hover b{color:var(--red)}
+.pl .cover{aspect-ratio:16/9;border-radius:12px;position:relative;box-shadow:0 -6px 0 -2px var(--gray),0 -12px 0 -4px var(--line)}
+.empty{padding:18px 0;color:var(--soft)}
+.faces{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:8px 22px;min-height:76px;align-items:center;color:var(--soft)}
+.foot span{margin-inline-start:auto}
+@media (max-width:980px){.layout{grid-template-columns:1fr}.left{position:static}.top nav,.tools input{display:none}}
+@media (max-width:600px){.wrap{padding:0 16px}.thumbs{grid-template-columns:1fr}.tools .btn-g{display:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#">Open<i>B</i>ench</a><nav aria-label="التنقل الرئيسي" id="nav"></nav>
+  <div class="tools"><input type="search" placeholder="ابحث" aria-label="بحث"><button class="ib" data-theme-toggle type="button"></button><a class="btn btn-g" href="#">دخول</a><a class="btn btn-r" href="#">أنشئ حسابك</a></div>
+</div></header>
+<main class="wrap layout">
+  <div class="left">
+    <section class="player" aria-label="أحدث فيديو على القناة">
+      <a class="screen" href="#" id="scr" aria-label="شاهد الفيديو"></a>
+      <div class="timeline" id="tl" aria-label="فصول الفيديو بحسب المجال"></div>
+      <div class="pinfo" id="pinfo"></div>
+    </section>
+    <nav class="chapters" aria-label="الفصول"><h2>فصول المنتدى</h2><div id="chaps" role="tablist" aria-orientation="vertical"></div></nav>
+  </div>
+  <section class="right" id="right" aria-live="polite"></section>
+</main>
+<footer class="foot"><div class="wrap"><a href="#">عن المنتدى</a><a href="#">القوانين</a><a href="#">الخصوصية</a><a href="#">تواصل معنا</a><span>© 2026 OpenBench</span></div></footer>
+<script>
+OB.ready(function(){
+  var D=OB.D,$=OB.$,v=D.video;
+  $('#nav').innerHTML=OB.nav(0);
+  $('#scr').innerHTML=OB.cover(v)+'<span class="play">'+OB.icon('play')+'</span>';
+  $('#pinfo').innerHTML='<h1>'+v.title+'</h1><p>'+v.ago+'، '+v.views+' مشاهدة، '+v.comments+' تعليقًا في المنتدى</p>';
+  // The timeline is split by topic count; each segment and each chapter picks a field.
+  var tot=D.fields.reduce(function(a,f){return a+parseFloat(f.topics);},0);
+  $('#tl').innerHTML=D.fields.map(function(f){return '<button type="button" class="seg" data-field="'+f.id+'" style="--h:'+f.h+';flex:'+parseFloat(f.topics)/tot+'" aria-label="'+f.name+'"></button>';}).join('');
+  $('#chaps').innerHTML=D.fields.map(function(f){return '<button type="button" role="tab" class="chap" data-field="'+f.id+'" style="--h:'+f.h+'"><span class="dot"></span>'+f.name+'<small>'+f.topics+'</small></button>';}).join('');
+  var both=document.querySelector('.left');OB.group(both,'data-field','field');
+  OB.bindKinds($('#right'));
+
+  OB.on(function(s){
+    var f=OB.field(s.field),th=OB.threads(s.field,s.kind),pr=OB.projects(s.field),co=OB.courses(s.field);
+    $('#right').innerHTML='<h2 class="ct">'+f.name+'</h2><p class="sub">'+f.desc+'</p>'+OB.kindBar(s.kind)+
+     '<ul class="threads">'+(th.map(function(t){return '<li><a href="#">'+OB.av(t.by,'44px')+'<div><b>'+t.title+'</b><div class="m">'+OB.kindTags(t)+' '+t.by+'، '+t.ago+'، '+t.r+' ردًا</div></div></a></li>';}).join('')||'<li class="empty">لا توجد مشاركات من هذا النوع بعد.</li>')+'</ul>'+
+     '<h3>مبنية من فيديوهات القناة</h3><p>مشاريع الأعضاء في '+f.name+'</p><div class="thumbs th">'+pr.map(function(p){return '<a href="#">'+OB.cover(p)+'<b>'+p.title+'</b><span class="m">'+p.by+'، '+p.likes+' إعجاب، '+p.st+'</span></a>';}).join('').replace(/<\/div><b>/g,'<span class="bd">'+'مشروع'+'</span></div><b>')+'</div>'+
+     '<h3>قوائم الدورات</h3><p>درس بعد درس، بالترتيب</p><div class="thumbs pl">'+co.map(function(c){return '<a href="#">'+OB.cover(c).replace('</div>','<span class="bd" style="inset-inline-end:8px;inset-inline-start:auto">'+c.n+' درسًا</span></div>')+'<b style="display:block;margin-top:8px;font-weight:700">'+c.title+'</b><span class="m">'+c.by+'، '+c.level+'</span></a>';}).join('')+'</div>';
+  });
+});
+</script>
+</body>
+</html>

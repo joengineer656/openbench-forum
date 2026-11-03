@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-default="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenBench | اللوحة المفتوحة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@500;700&family=Mada:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/base.css">
+<script src="shared/data.js"></script><script src="shared/core.js"></script>
+<style>
+:root{--bg:#f4f6f8;--dot:#c9cfd8;--panel:#fff;--ink:#1d222b;--soft:#586170;--line:#dde1e8;--blue:#2f6bff;--blue-ink:#fff;--nq:#c8e2ff;--nt:#e2d3ff;--nd:#e6e8ec;--ny:#ffe680;--np:#ffc7d9;--ng:#c9f2d4;--note-ink:#1d222b;--focus:#2f6bff;--fh:"Reem Kufi Fun",sans-serif;--f:"Mada",sans-serif}
+html[data-theme=dark]{--bg:#111318;--dot:#2c313b;--panel:#1b1f27;--ink:#eef0f4;--soft:#a2aab6;--line:#2c313b;--blue:#6c9bff;--blue-ink:#071433;--nq:#27415f;--nt:#3d2f61;--nd:#2c3038;--ny:#5e4f12;--np:#5e2a40;--ng:#1f4c33;--note-ink:#f2f4f7;--focus:#6c9bff}
+body{background:var(--bg);color:var(--ink);font:400 .98rem/1.65 var(--f);overflow-x:hidden}
+.top{display:flex;align-items:center;gap:14px;padding:0 20px;min-height:58px;background:var(--panel);border-bottom:1px solid var(--line);position:relative;z-index:30}
+.logo{font:700 1.4rem var(--fh);direction:ltr}
+.top nav{display:flex;gap:4px 16px;color:var(--soft);font-size:.88rem}
+.top nav a:hover,.top nav a[aria-current]{color:var(--ink)}
+.tools{display:flex;gap:8px;margin-inline-start:auto;align-items:center}
+.ib{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;box-shadow:0 0 0 1px var(--line);background:var(--panel)}
+.ib[aria-pressed=true]{background:var(--blue);color:var(--blue-ink)}
+.btn{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:10px;font-weight:600;white-space:nowrap;font-size:.9rem}
+.btn-b{background:var(--blue);color:var(--blue-ink)}.btn-g{box-shadow:inset 0 0 0 1px var(--line)}
+.stage{position:relative;height:calc(100dvh - 58px);min-height:520px;overflow:hidden;cursor:grab;touch-action:none;
+  background:radial-gradient(circle,var(--dot) 1.4px,transparent 1.6px) 0 0/26px 26px,var(--bg)}
+.stage.drag{cursor:grabbing}
+.stage{direction:ltr}.stage>*{direction:rtl}
+.board{position:absolute;left:0;top:0;width:2700px;height:1750px;transform-origin:0 0;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.stage.drag .board{transition:none}
+.cl{position:absolute;width:760px;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start;align-content:flex-start;padding:10px}
+.note{width:210px;padding:12px 14px;border-radius:6px;background:var(--bg-n,var(--nd));color:var(--note-ink);box-shadow:0 6px 14px rgba(0,0,0,.12);rotate:var(--r,0deg);font-size:.95rem;line-height:1.55;transition:opacity .25s,filter .25s}
+.note.q{--bg-n:var(--nq)}.note.t{--bg-n:var(--nt)}.note.d{--bg-n:var(--nd)}
+.note b{display:block;font-weight:600}
+.note .m{display:block;margin-top:6px;font-size:.8rem;opacity:.75}
+.note:hover{box-shadow:0 10px 22px rgba(0,0,0,.22)}
+.note.dim,.pol.dim,.tick.dim{opacity:.22;filter:grayscale(1)}
+.title{width:100%;display:flex;align-items:center;gap:14px;margin-bottom:4px}
+.title .badge{display:grid;place-items:center;width:64px;height:64px;border-radius:18px;background:hsl(var(--h) 80% 60%);color:#10131a}
+.title .badge .ic{width:34px;height:34px}
+.title h2{font:700 2.6rem/1.2 var(--fh)}
+.title p{color:var(--soft)}
+.pol{width:200px;padding:10px 10px 14px;background:#fff;color:#1d222b;box-shadow:0 8px 18px rgba(0,0,0,.2);rotate:var(--r,0deg);transition:opacity .25s,filter .25s}
+html[data-theme=dark] .pol{background:#f1f2f4}
+.pol .cover{aspect-ratio:1}
+.pol b{display:block;margin-top:8px;font-weight:600;font-size:.88rem;line-height:1.45}
+.pol .m{font-size:.78rem;color:#586170}
+.pol:hover{box-shadow:0 12px 26px rgba(0,0,0,.3)}
+.tick{width:210px;padding:12px 14px;border-radius:10px;background:var(--ny);color:var(--note-ink);box-shadow:0 6px 14px rgba(0,0,0,.12);border:2px dashed rgba(0,0,0,.25);rotate:var(--r,0deg);transition:opacity .25s,filter .25s}
+html[data-theme=dark] .tick{border-color:rgba(255,255,255,.3)}
+.tick b{display:block;font-weight:700;font-size:1rem}.tick .m{font-size:.82rem;opacity:.8}
+.mini{position:absolute;inset-block-end:16px;inset-inline-start:16px;z-index:10;padding:10px;border-radius:16px;background:var(--panel);box-shadow:0 0 0 1px var(--line),0 12px 30px rgba(0,0,0,.18);display:grid;grid-template-columns:repeat(3,1fr);gap:6px;cursor:default}
+.mini button{display:grid;place-items:center;width:56px;height:42px;border-radius:9px;background:hsl(var(--h) 70% 85%);color:hsl(var(--h) 60% 25%)}
+html[data-theme=dark] .mini button{background:hsl(var(--h) 35% 22%);color:hsl(var(--h) 80% 80%)}
+.mini button.is-on{box-shadow:0 0 0 3px var(--blue)}
+.zoom{position:absolute;inset-block-end:16px;inset-inline-end:16px;z-index:10;display:flex;gap:6px;cursor:default}
+.kb{position:absolute;inset-block-start:14px;inset-inline-start:50%;translate:50% 0;z-index:10;cursor:default;padding:6px;border-radius:14px;background:var(--panel);box-shadow:0 0 0 1px var(--line),0 8px 24px rgba(0,0,0,.12)}
+.kb .chips{display:flex;gap:4px;margin:0}
+.chip{padding:3px 14px;border-radius:9px;font-size:.88rem;color:var(--soft);font-weight:500}
+.chip.is-on{background:var(--ink);color:var(--bg)}
+.hint{position:absolute;inset-block-start:14px;inset-inline-end:14px;z-index:10;padding:6px 12px;border-radius:10px;background:var(--panel);box-shadow:0 0 0 1px var(--line);font-size:.82rem;color:var(--soft);cursor:default}
+.listview{max-width:880px;margin:0 auto;padding:20px 20px 60px}
+.listview h2{font:700 2rem var(--fh)}
+.listview .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.listview .chip{box-shadow:inset 0 0 0 1px var(--line)}
+.lt li a{display:block;padding:10px 0;border-top:1px solid var(--line);font-weight:500}
+.lt li a:hover{color:var(--blue)}
+.lt .m{display:block;font-size:.84rem;color:var(--soft);font-weight:400}
+.listview h3{font:700 1.3rem var(--fh);margin:22px 0 8px}
+.lp{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.lp .pol{width:auto;rotate:0deg}
+.side{max-width:880px;margin:0 auto;padding:0 20px 40px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.box{padding:14px 16px;border-radius:14px;background:var(--panel);box-shadow:0 0 0 1px var(--line)}
+.box h2{font:700 1.15rem var(--fh);margin-bottom:6px}
+.box li a{display:block;padding:6px 0;font-size:.88rem;line-height:1.5}
+.box li a:hover{color:var(--blue)}
+.faces{display:flex;flex-wrap:wrap;gap:6px}
+.vid{position:relative;display:block}.vid .cover{aspect-ratio:16/9;border-radius:10px}
+.play{position:absolute;inset:0;margin:auto;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--blue);color:var(--blue-ink)}
+.play .ic{width:18px;height:18px;translate:-1px 0}
+.foot{display:flex;flex-wrap:wrap;gap:8px 22px;padding:20px;color:var(--soft);font-size:.88rem}
+.foot span{margin-inline-start:auto}
+[hidden]{display:none!important}
+@media (max-width:820px){.top nav{display:none}.hint{display:none}.tools .btn-g{display:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="#">OpenBench</a><nav aria-label="التنقل الرئيسي" id="nav"></nav>
+  <div class="tools"><button class="ib" id="viewbtn" type="button" aria-pressed="false" aria-label="عرض القائمة بدل اللوحة"></button><button class="ib" data-theme-toggle type="button"></button><a class="btn btn-g" href="#">دخول</a><a class="btn btn-b" href="#">أنشئ حسابك</a></div>
+</header>
+
+<main>
+  <div class="stage" id="stage" role="group" aria-label="لوحة المنتدى. اسحب بالفأرة أو الإصبع للتنقل، أو استخدم الخريطة الصغيرة.">
+    <div class="board" id="board"></div>
+    <div class="kb" id="kb"></div>
+    <p class="hint">اسحب اللوحة للتنقل</p>
+    <div class="mini" id="mini" role="tablist" aria-label="الانتقال إلى مجال"></div>
+    <div class="zoom"><button class="ib" id="zin" type="button" aria-label="تكبير"></button><button class="ib" id="zout" type="button" aria-label="تصغير"></button><button class="ib" id="zfit" type="button" aria-label="عرض اللوحة كاملة"></button></div>
+  </div>
+  <div id="listwrap" hidden>
+    <div class="listview" id="listview"></div>
+    <div class="side" id="side"></div>
+  </div>
+</main>
+<footer class="foot"><a href="#">عن المنتدى</a><a href="#">القوانين</a><a href="#">الخصوصية</a><a href="#">تواصل معنا</a><span>© 2026 OpenBench</span></footer>
+
+<script>
+OB.ready(function(){
+  var D=OB.D,$=OB.$,stage=$('#stage'),board=$('#board'),T={x:0,y:0,s:1},listMode=matchMedia('(max-width:820px)').matches;
+  $('#nav').innerHTML=OB.nav(0);
+  $('#zin').innerHTML=OB.icon('plus');$('#zout').innerHTML=OB.icon('minus');$('#zfit').innerHTML=OB.icon('fit');$('#viewbtn').innerHTML=OB.icon('list');
+
+  // Six clusters on the board. Positions are top-left corners in board pixels.
+  var POS={mecha:[60,40],robot:[920,40],embed:[1780,40],soft:[60,900],mech:[920,900],elec:[1780,900]};
+  function rot(i){return ((i*37)%9-4)*.7;}
+  board.innerHTML=D.fields.map(function(f){
+    var th=OB.threads(f.id,'all'),pr=OB.projects(f.id),co=OB.courses(f.id),i=0;
+    return '<section class="cl" id="cl-'+f.id+'" style="left:'+POS[f.id][0]+'px;top:'+POS[f.id][1]+'px" aria-label="'+f.name+'"><div class="title"><span class="badge" style="--h:'+f.h+'">'+OB.icon(f.icon)+'</span><div><h2>'+f.name+'</h2><p>'+f.desc+'</p></div></div>'+
+      th.map(function(t){return '<a class="note '+t.k+'" data-k="'+t.k+'" href="#" style="--r:'+rot(i++)+'deg"><b>'+t.title+'</b><span class="m">'+OB.kindTags(t)+' '+t.by+'، '+t.r+' ردًا</span></a>';}).join('')+
+      pr.map(function(p){return '<a class="pol" data-k="p" href="#" style="--r:'+rot(i++)+'deg">'+OB.cover(p)+'<b>'+p.title+'</b><span class="m">'+p.by+'، '+p.likes+' إعجاب</span></a>';}).join('')+
+      co.map(function(c){return '<a class="tick" data-k="c" href="#" style="--r:'+rot(i++)+'deg"><b>'+c.title+'</b><span class="m">دورة، '+c.n+' درسًا، '+c.level+'</span></a>';}).join('')+'</section>';
+  }).join('');
+
+  $('#mini').innerHTML=D.fields.map(function(f){return '<button type="button" role="tab" data-field="'+f.id+'" style="--h:'+f.h+'" aria-label="'+f.name+'" title="'+f.name+'">'+OB.icon(f.icon)+'</button>';}).join('');
+  OB.group($('#mini'),'data-field','field');
+  $('#kb').innerHTML=OB.kindBar(OB.state.kind,true);OB.bindKinds($('#kb'));
+
+  function apply(anim){board.style.transition=anim===false?'none':'';board.style.transform='translate('+T.x+'px,'+T.y+'px) scale('+T.s+')';}
+  function focusField(id,anim){
+    var c=$('#cl-'+id),w=stage.clientWidth,h=stage.clientHeight;
+    var sc=Math.min(1,w/(c.offsetWidth+120),h/(c.offsetHeight+160));T.s=sc;
+    T.x=w/2-(c.offsetLeft+c.offsetWidth/2)*sc;T.y=h/2-(c.offsetTop+c.offsetHeight/2)*sc;apply(anim);
+  }
+  function fit(){var w=stage.clientWidth,h=stage.clientHeight,sc=Math.min(w/2700,h/1750);T.s=sc;T.x=(w-2700*sc)/2;T.y=(h-1750*sc)/2;apply();}
+
+  // Drag to pan. Interactive items stay clickable (movement under 5px counts as a click).
+  var d=null;
+  stage.addEventListener('pointerdown',function(e){if(e.target.closest('.kb,.mini,.zoom,.hint'))return;d={x:e.clientX,y:e.clientY,tx:T.x,ty:T.y,moved:false};});
+  addEventListener('pointermove',function(e){if(!d)return;var dx=e.clientX-d.x,dy=e.clientY-d.y;if(!d.moved&&Math.abs(dx)+Math.abs(dy)<5)return;d.moved=true;stage.classList.add('drag');T.x=d.tx+dx;T.y=d.ty+dy;apply(false);});
+  addEventListener('pointerup',function(){if(d&&d.moved){stage.addEventListener('click',function k(e){e.preventDefault();e.stopPropagation();stage.removeEventListener('click',k,true);},true);}d=null;stage.classList.remove('drag');});
+  function zoom(f){var w=stage.clientWidth,h=stage.clientHeight,ns=Math.max(.25,Math.min(1.4,T.s*f)),r=ns/T.s;T.x=w/2-(w/2-T.x)*r;T.y=h/2-(h/2-T.y)*r;T.s=ns;apply();}
+  $('#zin').onclick=function(){zoom(1.25);};$('#zout').onclick=function(){zoom(.8);};$('#zfit').onclick=fit;
+  stage.addEventListener('keydown',function(e){var m={ArrowLeft:[60,0],ArrowRight:[-60,0],ArrowUp:[0,60],ArrowDown:[0,-60]}[e.key];if(m&&e.target===stage){e.preventDefault();T.x+=m[0];T.y+=m[1];apply();}});
+  stage.tabIndex=0;
+
+  // List view (also the default on phones)
+  function list(s){
+    var f=OB.field(s.field),th=OB.threads(s.field,s.kind),pr=OB.projects(s.field),co=OB.courses(s.field);
+    $('#listview').innerHTML='<h2>'+f.name+'</h2><p style="color:var(--soft)">'+f.desc+'</p><div class="chips" role="group" aria-label="المجال">'+D.fields.map(function(x){return '<button type="button" class="chip'+(x.id===s.field?' is-on':'')+'" data-fl="'+x.id+'" aria-pressed="'+(x.id===s.field)+'">'+x.name+'</button>';}).join('')+'</div>'+OB.kindBar(s.kind)+
+     '<ul class="lt">'+(th.map(function(t){return '<li><a href="#">'+t.title+'<span class="m">'+OB.kindTags(t)+' '+t.by+'، '+t.ago+'</span></a></li>';}).join('')||'<li class="m" style="padding:12px 0">لا توجد مشاركات من هذا النوع بعد.</li>')+'</ul>'+
+     '<h3>مشاريع الأعضاء</h3><div class="lp">'+pr.map(function(p){return '<a class="pol" href="#">'+OB.cover(p)+'<b>'+p.title+'</b><span class="m">'+p.by+'، '+p.likes+' إعجاب</span></a>';}).join('')+'</div>'+
+     '<h3>الدورات</h3><ul class="lt">'+co.map(function(c){return '<li><a href="#">'+c.title+'<span class="m">'+c.n+' درسًا، '+c.level+'، '+c.by+'</span></a></li>';}).join('')+'</ul>';
+  }
+  $('#listview').addEventListener('click',function(e){var b=e.target.closest('[data-fl]');if(b){OB.set({field:b.dataset.fl});$('[data-fl="'+b.dataset.fl+'"]').focus();}});
+  OB.bindKinds($('#listview'));
+  var v=D.video;
+  $('#side').innerHTML='<section class="box"><h2>أحدث فيديو</h2><a class="vid" href="#">'+OB.cover(v)+'<span class="play">'+OB.icon('play')+'</span></a></section><section class="box"><h2>أسئلة بلا إجابة</h2><ul>'+OB.unanswered(3).map(function(t){return '<li><a href="#">'+t.title+'</a></li>';}).join('')+'</ul></section><section class="box"><h2>متصلون الآن</h2><div class="faces">'+D.online.map(function(n){return OB.av(n,'30px');}).join('')+'</div></section>';
+
+  function mode(){stage.hidden=listMode;$('#listwrap').hidden=!listMode;$('#viewbtn').setAttribute('aria-pressed',listMode);$('#viewbtn').innerHTML=OB.icon(listMode?'map':'list');$('#viewbtn').setAttribute('aria-label',listMode?'عرض اللوحة':'عرض القائمة');}
+  $('#viewbtn').onclick=function(){listMode=!listMode;mode();if(!listMode)focusField(OB.state.field,false);};
+  mode();
+
+  var first=true;
+  OB.on(function(s){
+    // dim notes whose kind is not selected
+    OB.$$('[data-k]',board).forEach(function(n){var k=n.dataset.k,hide=s.kind!=='all'&&k!==s.kind;n.classList.toggle('dim',hide);});
+    list(s);
+    if(!listMode){focusField(s.field,!first);}
+    first=false;
+  });
+  addEventListener('resize',function(){if(!listMode)focusField(OB.state.field,false);});
+});
+</script>
+</body>
+</html>

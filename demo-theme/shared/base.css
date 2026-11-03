@@ -1,0 +1,49 @@
+/* Shared by every demo page: reset, icons, avatars, cover photos, kind labels. Pages override with their own tokens. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; text-rendering: optimizeLegibility; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; padding: 0; }
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+input { font: inherit; color: inherit; min-width: 0; }
+img, svg { display: block; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:focus-visible { outline: 3px solid var(--focus, #3b82f6); outline-offset: 3px; border-radius: 4px; }
+
+.ic { width: 1.2em; height: 1.2em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+html[data-theme=dark] .i-moon, html[data-theme=light] .i-sun { display: none; }
+
+.av { --s: 2rem; display: inline-grid; place-items: center; flex: none; width: var(--s); height: var(--s); border-radius: 50%;
+  font-weight: 700; font-size: calc(var(--s) * .42); line-height: 1; background: hsl(var(--h) 55% 32%); color: hsl(var(--h) 90% 90%); }
+html[data-theme=light] .av { background: hsl(var(--h) 65% 88%); color: hsl(var(--h) 70% 25%); }
+
+/* Placeholder project photo: tinted grid plus the field icon. In XenForo this is the thread's cover image. */
+.cover { --h: 190; position: relative; display: grid; place-items: center; overflow: hidden; color: hsl(var(--h) 80% 78% / .75);
+  background:
+    radial-gradient(circle at 72% 24%, hsl(var(--h) 85% 55% / .4), transparent 62%),
+    linear-gradient(hsl(var(--h) 60% 72% / .13) 1px, transparent 1px) 0 0 / 18px 18px,
+    linear-gradient(90deg, hsl(var(--h) 60% 72% / .13) 1px, transparent 1px) 0 0 / 18px 18px,
+    hsl(var(--h) 40% 15%); }
+html[data-theme=light] .cover { color: hsl(var(--h) 60% 36% / .7);
+  background:
+    radial-gradient(circle at 72% 24%, hsl(var(--h) 90% 62% / .35), transparent 62%),
+    linear-gradient(hsl(var(--h) 60% 40% / .1) 1px, transparent 1px) 0 0 / 18px 18px,
+    linear-gradient(90deg, hsl(var(--h) 60% 40% / .1) 1px, transparent 1px) 0 0 / 18px 18px,
+    hsl(var(--h) 60% 91%); }
+.cover .ic { width: 34%; height: auto; max-width: 84px; min-width: 26px; aspect-ratio: 1; stroke-width: 1.3; }
+
+/* Kind labels on threads */
+.kind { display: inline-block; padding: 0 .55em; border-radius: .4em; font-size: .78em; font-weight: 600; line-height: 1.75; white-space: nowrap; background: var(--kb); color: var(--kc); }
+.kind-q { --kb: hsl(214 90% 52% / .14); --kc: hsl(214 75% 42%); }
+.kind-t { --kb: hsl(268 80% 58% / .14); --kc: hsl(268 60% 45%); }
+.kind-d { --kb: hsl(220 10% 50% / .16); --kc: hsl(220 12% 38%); }
+.kind-s { --kb: hsl(152 70% 40% / .16); --kc: hsl(152 80% 26%); }
+.kind-u { --kb: hsl(24 95% 52% / .16); --kc: hsl(20 85% 38%); }
+html[data-theme=dark] .kind-q { --kc: hsl(214 95% 76%); }
+html[data-theme=dark] .kind-t { --kc: hsl(268 90% 80%); }
+html[data-theme=dark] .kind-d { --kc: hsl(220 15% 74%); }
+html[data-theme=dark] .kind-s { --kc: hsl(152 70% 62%); }
+html[data-theme=dark] .kind-u { --kc: hsl(28 95% 66%); }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }

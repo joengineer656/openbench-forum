@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-default="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenBench | الحواف السميكة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@400;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/base.css">
+<script src="shared/data.js"></script><script src="shared/core.js"></script>
+<style>
+:root{--paper:#f1f1f1;--ink:#000;--surface:#fff;--orange:#ff5c39;--blue:#3a6bff;--green:#00c48c;--yellow:#ffd23f;--on-c:#000;--focus:#3a6bff;--fh:"Lemonada",sans-serif;--f:"Tajawal",sans-serif}
+html[data-theme=dark]{--paper:#121212;--ink:#f4f4ef;--surface:#1d1d1d;--orange:#ff6b4a;--blue:#6b8cff;--green:#19d9a0;--yellow:#ffd23f;--on-c:#0a0a0a;--focus:#ffd23f}
+body{background:var(--paper);color:var(--ink);font:500 1.05rem/1.65 var(--f)}
+.wrap{max-width:1240px;margin:auto;padding:0 24px}
+.bx{border:3px solid var(--ink);border-radius:12px;background:var(--surface);box-shadow:6px 6px 0 var(--ink)}
+.top{padding:18px 0}
+.top .bx{display:flex;align-items:center;gap:14px;padding:10px 16px;flex-wrap:wrap}
+.logo{font:700 1.3rem var(--fh);direction:ltr;padding:2px 12px;background:var(--yellow);color:#000;border:3px solid var(--ink);border-radius:8px;rotate:-2deg}
+.top nav{display:flex;gap:4px 18px;font-weight:700}
+.top nav a:hover,.top nav a[aria-current]{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:5px}
+.tools{display:flex;gap:10px;margin-inline-start:auto;align-items:center}
+.btn{display:inline-flex;align-items:center;height:42px;padding:0 18px;border:3px solid var(--ink);border-radius:10px;font-weight:800;white-space:nowrap;background:var(--c,var(--surface));color:var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.btn[style*="--c"]{color:#000}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active,.btn[aria-pressed=true]{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.ib{display:grid;place-items:center;width:42px;height:42px;padding:0;color:var(--ink);background:var(--surface)}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;padding:30px 0 20px}
+.hero h1{font:700 clamp(2.1rem,4.6vw,3.7rem)/1.95 var(--fh);display:inline;background:var(--yellow);color:#000;padding:.05em .25em;box-decoration-break:clone;-webkit-box-decoration-break:clone;border:3px solid var(--ink);border-radius:8px}
+.hero p{margin-top:22px;font-size:1.15rem;max-width:46ch}
+.stk{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.stk span{padding:3px 14px;border:3px solid var(--ink);border-radius:999px;background:var(--c);color:#000;font-weight:800;box-shadow:3px 3px 0 var(--ink)}
+.vc{overflow:hidden;rotate:1.5deg}
+.vc .cover{aspect-ratio:16/9;border-bottom:3px solid var(--ink)}
+.vc .cover .ic{width:20%}
+.vc .vb{padding:12px 16px}
+.vc b{font-weight:800}
+.vcv{position:relative;display:block}
+.play{position:absolute;inset:0;margin:auto;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--orange);color:#000;border:3px solid var(--ink)}
+.play .ic{width:24px;height:24px;translate:-2px 0}
+.picker{padding:18px 0 6px}
+.picker h2,.sec h2{font:700 1.5rem/1.5 var(--fh);margin-bottom:12px}
+.pk{display:flex;flex-wrap:wrap;gap:12px;padding:4px 4px 10px}
+.pk .btn{--c:var(--surface)}
+.pk .btn[aria-pressed=true]{background:var(--blue);color:#000}
+.pk .btn .ic{width:20px;height:20px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;align-items:start;padding:12px 0 24px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:6px 4px 14px}
+.chip{padding:3px 16px;border:3px solid var(--ink);border-radius:10px;font-weight:800;background:var(--surface);box-shadow:3px 3px 0 var(--ink)}
+.chip.is-on{background:var(--green);color:#000;transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.tl li+li{margin-top:12px}
+.tl a{display:block;padding:12px 16px}
+.tl a:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+.tl b{display:block;font-weight:800;font-size:1.1rem;line-height:1.55}
+.tl .m{font-size:.9rem;font-weight:500;opacity:.85}
+.kind{border:2px solid var(--ink);border-radius:6px;background:var(--c,var(--surface));color:#000;font-weight:800;line-height:1.6}
+.kind-q{--c:#9ec5ff}.kind-t{--c:#d7c2ff}.kind-d{--c:#ddd}.kind-s{--c:#8ff0c8}.kind-u{--c:#ffb199}
+.empty{padding:16px;border:3px dashed var(--ink);border-radius:12px}
+.sd{display:flex;flex-direction:column;gap:22px}
+.sd section{padding:14px 16px}
+.sd h2{font:700 1.15rem var(--fh);margin-bottom:6px}
+.sd li a{display:block;padding:6px 0;font-weight:700;line-height:1.5;border-top:2px solid var(--ink)}
+.sd li:first-child a{border-top:0}
+.sd li a:hover{text-decoration:underline}
+.sd small{display:block;font-weight:500;opacity:.8}
+.un{background:var(--orange);color:#000}
+.faces{display:flex;flex-wrap:wrap;gap:6px}
+.faces .av{border:2px solid var(--ink)}
+.sec{padding:20px 0}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:26px;padding:6px 6px 12px}
+.ph{display:block;overflow:hidden;rotate:var(--r,0deg);transition:transform .12s}
+.ph:hover{transform:translate(-3px,-3px) rotate(0);box-shadow:9px 9px 0 var(--ink)}
+.ph .cover{aspect-ratio:4/3;border-bottom:3px solid var(--ink)}
+.ph .pb{padding:10px 14px 14px}
+.ph b{display:block;font-weight:800;line-height:1.5}
+.tg{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.tg i{font-style:normal;font-size:.78rem;font-weight:800;padding:0 8px;border:2px solid var(--ink);border-radius:6px;background:var(--yellow);color:#000;direction:ltr}
+.ph .f{display:flex;justify-content:space-between;font-size:.9rem}
+.cc{display:flex;flex-direction:column;gap:10px;padding:16px;background:var(--c);color:#000;min-height:150px;justify-content:space-between}
+.cc:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.cc b{font:700 1.15rem/1.5 var(--fh)}
+.cc .lv{align-self:flex-start;padding:0 12px;border:2px solid #000;border-radius:999px;background:#fff;font-weight:800;font-size:.85rem}
+.foot{padding:26px 0 40px}
+.foot .bx{display:flex;flex-wrap:wrap;gap:8px 22px;padding:14px 18px;align-items:center;font-weight:700}
+.foot span{margin-inline-start:auto}
+@media (max-width:920px){.hero,.cols{grid-template-columns:1fr}.vc{rotate:0deg}.top nav{display:none}}
+@media (max-width:560px){.wrap{padding:0 14px}.tools .btn:not(.ib):not(.btn-main){display:none}.ph{rotate:0deg}.bx{box-shadow:4px 4px 0 var(--ink)}}
+</style>
+</head>
+<body>
+<header class="top wrap"><div class="bx">
+  <a class="logo" href="#">OpenBench</a><nav aria-label="التنقل الرئيسي" id="nav"></nav>
+  <div class="tools"><button class="btn ib" data-theme-toggle type="button"></button><a class="btn" href="#">دخول</a><a class="btn btn-main" href="#" style="--c:var(--orange)">أنشئ حسابك</a></div>
+</div></header>
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1>هندسة بلا تعقيد، ومجتمع بلا حواجز</h1>
+      <p>اسأل، تعلّم، وأرِ الناس ما صنعتَ. كل مجال هندسي عربي هنا، وكل إجابة تبقى لمن يأتي بعدك.</p>
+      <div class="stk"><span style="--c:var(--blue)">18,420 عضو</span><span style="--c:var(--green)">9,710 سؤال محلول</span><span style="--c:var(--orange)">1,284 مشروع</span></div>
+    </div>
+    <article class="bx vc" id="vc"></article>
+  </section>
+  <section class="picker" aria-labelledby="ph"><h2 id="ph">اختر مجالك</h2><div class="pk" id="pk" role="group" aria-label="المجالات"></div></section>
+  <div class="cols">
+    <section aria-live="polite"><div id="kb"></div><ul class="tl" id="tl"></ul></section>
+    <aside class="sd" id="sd"></aside>
+  </div>
+  <section class="sec" aria-labelledby="h-p"><h2 id="h-p">مشاريع الأعضاء</h2><div class="photos" id="pj"></div></section>
+  <section class="sec" aria-labelledby="h-c"><h2 id="h-c">الدورات</h2><div class="photos" id="cs"></div></section>
+</main>
+<footer class="foot wrap"><div class="bx"><a href="#">عن المنتدى</a><a href="#">القوانين</a><a href="#">الخصوصية</a><a href="#">تواصل معنا</a><span>© 2026 OpenBench</span></div></footer>
+<script>
+OB.ready(function(){
+  var D=OB.D,$=OB.$,v=D.video,COL=['var(--blue)','var(--green)','var(--orange)','var(--yellow)','#c9a8ff','#ff9fc6'];
+  $('#nav').innerHTML=OB.nav(0);
+  $('#vc').innerHTML='<a class="vcv" href="#" aria-label="شاهد الفيديو">'+OB.cover(v)+'<span class="play">'+OB.icon('play')+'</span></a><div class="vb"><b>'+v.title+'</b><div style="font-size:.9rem">'+v.ago+'، '+v.comments+' تعليقًا في المنتدى</div></div>';
+  $('#pk').innerHTML=D.fields.map(function(f){return '<button type="button" class="btn" data-field="'+f.id+'" aria-pressed="false">'+OB.icon(f.icon)+f.name+'</button>';}).join('');
+  OB.group($('#pk'),'data-field','field');
+  OB.bindKinds($('#kb'));
+  OB.on(function(s){
+    var f=OB.field(s.field),th=OB.threads(s.field,s.kind),pr=OB.projects(s.field),co=OB.courses(s.field);
+    $('#kb').innerHTML=OB.kindBar(s.kind);
+    $('#tl').innerHTML=th.map(function(t){return '<li><a class="bx" href="#"><b>'+t.title+'</b><span class="m">'+OB.kindTags(t)+' '+t.by+'، '+t.ago+'، '+t.r+' ردًا</span></a></li>';}).join('')||'<li class="empty">لا توجد مشاركات من هذا النوع بعد. كن أول من يكتب.</li>';
+    $('#pj').innerHTML=pr.map(function(p,i){return '<a class="bx ph" href="#" style="--r:'+(i%2?1.2:-1.2)+'deg">'+OB.cover(p)+'<div class="pb"><b>'+p.title+'</b><div class="tg">'+p.tags.map(function(x){return '<i>'+x+'</i>';}).join('')+'</div><div class="f"><span>'+p.by+'</span><span>'+p.likes+' إعجاب، '+p.st+'</span></div></div></a>';}).join('');
+    $('#cs').innerHTML=co.map(function(c,i){return '<a class="bx cc" href="#" style="--c:'+COL[(i+2)%COL.length]+'"><span class="lv">'+c.level+'</span><b>'+c.title+'</b><span style="font-weight:700">'+c.n+' درسًا، '+c.by+'</span></a>';}).join('');
+  });
+  $('#sd').innerHTML='<section class="bx un"><h2>أسئلة بلا إجابة</h2><ul>'+OB.unanswered(4).map(function(t){return '<li><a href="#">'+t.title+'<small>'+t.by+'، '+t.ago+'</small></a></li>';}).join('')+'</ul></section><section class="bx"><h2>متصلون الآن ('+D.stats.online+')</h2><div class="faces">'+D.online.map(function(n){return OB.av(n,'34px');}).join('')+'</div></section>';
+});
+</script>
+</body>
+</html>
